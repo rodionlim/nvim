@@ -28,3 +28,16 @@ vim.keymap.set('n', '<C-/>', 'gc', { remap = true })
 
 -- Highlighting
 vim.keymap.set('n', '<Esc>', ':noh<CR>', { silent = true }) -- cancel highlights with escape
+
+-- macOS terminals commonly encode Option-Right/Left as Alt-f/Alt-b.
+-- Map both encodings explicitly so the leading Escape is not consumed by the
+-- Normal-mode <Esc> mapping above.
+vim.keymap.set('n', '<M-f>', 'w', { desc = 'Move one word right' })
+vim.keymap.set('n', '<M-b>', 'b', { desc = 'Move one word left' })
+vim.keymap.set('i', '<M-f>', '<C-o>w', { desc = 'Move one word right' })
+vim.keymap.set('i', '<M-b>', '<C-o>b', { desc = 'Move one word left' })
+
+vim.keymap.set('n', '<M-Right>', 'w', { desc = 'Move one word right' })
+vim.keymap.set('n', '<M-Left>', 'b', { desc = 'Move one word left' })
+vim.keymap.set('i', '<M-Right>', '<C-o>w', { desc = 'Move one word right' })
+vim.keymap.set('i', '<M-Left>', '<C-o>b', { desc = 'Move one word left' })
