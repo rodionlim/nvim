@@ -10,5 +10,4 @@ vim.opt.expandtab = true
 vim.opt.foldlevelstart = 99
 vim.opt.foldtext = ""
 
-
 vim.opt.clipboard:append("unnamedplus")
