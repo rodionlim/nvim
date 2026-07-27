@@ -41,3 +41,15 @@ vim.keymap.set('n', '<M-Right>', 'w', { desc = 'Move one word right' })
 vim.keymap.set('n', '<M-Left>', 'b', { desc = 'Move one word left' })
 vim.keymap.set('i', '<M-Right>', '<C-o>w', { desc = 'Move one word right' })
 vim.keymap.set('i', '<M-Left>', '<C-o>b', { desc = 'Move one word left' })
+
+-- Formatting
+vim.keymap.set('n', '<leader>p', function()
+    local oiut = vim.fn.system("npx prettier --stdin-filepath " .. vim.fn.expand("%"), vim.fn.getlin(1, "$"))
+    if vim.v.shell_error ~= 0 then
+        vim.notify(out, vim.log.levels.ERROR)
+        return
+    end
+    local view = vim.fn.winsaveview()
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(out, "\n", { trimempty = true }))
+    vim.fn.winrestview(view)
+end, { desc = 'Format buffer with Prettier' })

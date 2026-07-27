@@ -6,14 +6,17 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
+        local caps = require("cmp_nvim_lsp").default_capabilities()
+
+        vim.lsp.config('*', {
+            root_markers = { '.git' },
+            capabilities = caps,
+        })
+
         require("mason").setup()
         require("mason-lspconfig").setup()
         require("mason-tool-installer").setup({
             ensure_installed = { "lua_ls", "ts_ls", "eslint_d" }
-        })
-
-        vim.lsp.config('*', {
-            root_markers = { '.git' },
         })
 
         vim.diagnostic.config({
