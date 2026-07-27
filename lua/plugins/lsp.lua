@@ -16,7 +16,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup()
         require("mason-tool-installer").setup({
-            ensure_installed = { "lua_ls", "ts_ls", "eslint_d" }
+            ensure_installed = { "lua_ls", "ts_ls", "eslint_d", "ty", "ruff" }
         })
 
         vim.diagnostic.config({
@@ -189,5 +189,30 @@ return {
                 }
             }
         })
+
+        vim.lsp.config["ty"] = {
+            cmd = { "ty", "server" },
+            filetypes = { "python" },
+            root_markers = {
+                "pyproject.toml",
+                "setup.py",
+                "setup.cfg",
+                "requirements.txt"
+            },
+            capabilities = caps,
+            settings = {
+                ty = {},
+            }
+        }
+
+        vim.lsp.config["ruff"] = {
+            cmd = { "ruff", "server" },
+            filetypes = { "python" },
+            capabilities = caps,
+            root_markers = {
+                "pyproject.toml",
+                "ruff.toml"
+            },
+        }
     end
 }
