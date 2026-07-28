@@ -1,3 +1,7 @@
 nvim.log
 
 .DS_STORE
+
+.agents/
+
+skills-lock.json

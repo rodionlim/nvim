@@ -44,7 +44,7 @@ vim.keymap.set('i', '<M-Left>', '<C-o>b', { desc = 'Move one word left' })
 
 -- Formatting
 vim.keymap.set('n', '<leader>p', function()
-    local oiut = vim.fn.system("npx prettier --stdin-filepath " .. vim.fn.expand("%"), vim.fn.getlin(1, "$"))
+    local out = vim.fn.system("npx prettier --stdin-filepath " .. vim.fn.expand("%"), vim.fn.getline(1, "$"))
     if vim.v.shell_error ~= 0 then
         vim.notify(out, vim.log.levels.ERROR)
         return
@@ -53,3 +53,9 @@ vim.keymap.set('n', '<leader>p', function()
     vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(out, "\n", { trimempty = true }))
     vim.fn.winrestview(view)
 end, { desc = 'Format buffer with Prettier' })
+
+-- Wrapping
+vim.keymap.set('n', '<leader>tw', function()
+    vim.wo.wrap = not vim.wo.wrap
+    vim.wo.linebreak = vim.wo.wrap
+end, { desc = 'Toggle wrap' })
